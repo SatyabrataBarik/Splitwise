@@ -1,11 +1,13 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import Home from '../../Screens/Home';
+const tab=createBottomTabNavigator();
 const BottomNavigation = () => {
   return (
-    <View>
-      <Text>BottomNavigation</Text>
-    </View>
+   <tab.Navigator>
+    <tab.Screen component={Home} name='home'/>
+   </tab.Navigator>
   )
 }
 

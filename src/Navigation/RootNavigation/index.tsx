@@ -5,7 +5,7 @@ import {navigationScreen} from '../rootScreenFile';
 import Login from '../../Screens/Login';
 const root = createStackNavigator();
 const RootNavigation = () => {
-  console.log('navigationScreen', navigationScreen);
+ 
   return (
     <root.Navigator>
       {navigationScreen?.map((item: any) => {
@@ -15,6 +15,7 @@ const RootNavigation = () => {
             name={item.name}
             key={item.id}
             options={{headerShown: false}}
+         
           />
         );
       })}

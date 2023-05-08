@@ -5,9 +5,10 @@
  * @format
  */
 
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import type {PropsWithChildren} from 'react';
 import 'react-native-gesture-handler';
+
 import {
   SafeAreaView,
   ScrollView,
@@ -27,12 +28,16 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import RootNavigation from './src/Navigation/RootNavigation';
+import { useDispatch } from 'react-redux';
+import { cheakBackground } from './src/Redux/BackGroundContentSlice';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+interface SectionProps {
+  title: string,
+  children:JSX.Element
+}
 
 function Section({children, title}: SectionProps): JSX.Element {
+  
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -59,12 +64,20 @@ function Section({children, title}: SectionProps): JSX.Element {
 }
 
 function App(): JSX.Element {
+  const [dark,setDark]=useState(false)
+ const dispatch=useDispatch();
   const isDarkMode = useColorScheme() === 'dark';
-
+useEffect(()=>{
+  setDark(isDarkMode)
+})
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+ 
 
+    dispatch(cheakBackground(isDarkMode))
+  
+   
   return (
     <SafeAreaView style={{flex:1}} >
       <StatusBar
@@ -72,7 +85,7 @@ function App(): JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <NavigationContainer>
-        <RootNavigation/>
+        <RootNavigation />
       </NavigationContainer>
       
      </SafeAreaView>
